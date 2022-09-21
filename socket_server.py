@@ -46,15 +46,17 @@ if bytes_len != 0 :
 
         packed_buffer = connected_socket.recv(struc_nb_bytes)
 
-        if len(packed_buffer) != struc_nb_bytes:
+        if len(packed_buffer) != struc_nb_bytes & len(packed_buffer) != 0:
             raise IOError(f'Server partial read: {len(packed_buffer)} instead of {struc_nb_bytes}')
+
+        if len(packed_buffer) == 0:
+            break
 
         (bytes_len,) = struct.unpack("!I", packed_buffer)
         print(f"Going to receive {bytes_len} bytes")
 
 fichier.close()
 
-connected_socket.shutdown(socket.SHUT_RDWR)
 connected_socket.close()
 
 listening_socket.close()

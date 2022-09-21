@@ -22,7 +22,6 @@ while curr != "" :
     curr = input_file.readline()
 
 input_file.close()
-connected_socket.sendall(struct.pack('!I', 0))
 
 #Les traitements du serveur en lecture étant plus long, je laisse ce dernier shutdown en lecture puis fermer la socket
 connected_socket.shutdown(socket.SHUT_RDWR)
